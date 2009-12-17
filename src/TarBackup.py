@@ -15,22 +15,30 @@ import tarfile
 import time
 
 class TarBackup:
-    def __init__(self, backupName):
+    def __init__(self, backupName, originalPath):
         self.backupFileName = ""
         self.backupPath = ""
         self.backupDevice = []
-        self.backupName = ""
+        self.backupName = backupName
         self.archive_type = ""
+        self.originalPath = originalPath
+
+    # temp: device select path
 
     def setBackupFileName(self):
         current_time = time.localtime()
-        self.backupFileName = "%s-%s-%s-%s" % (self.backupName, current_time[0], current_time[1], current_time[2])
+        self.backupFileName = "%s-%s-%s-%s.%s" % (self.backupName, current_time[0], current_time[1], current_time[2], self.archive_type)
 
     def setArchiveType(self, type):
         self.archive_type = type
 
     def backup(self):
+        self.setBackupFileName()
+        
+        if(self.backupPath == ""):
+            self.backupPath = "."
+            
         filePath = "%s/%s" % (self.backupPath, self.backupFileName)
-        tar = tarfile.open("archive.tar.bz2", "w:%s" % self.archive_type)
-        tar.add(filePath)
+        tar = tarfile.open(filePath, "w:%s" % self.archive_type)
+        tar.add(self.originalPath)
         tar.close()
