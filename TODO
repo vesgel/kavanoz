@@ -1,0 +1,2 @@
+- Use filecmp to compare folders and files 
+- 'patch command' can be used to apply diff to the backup file
