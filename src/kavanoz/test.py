@@ -13,5 +13,5 @@
 
 from dir2dir import dir2dir
 
-d2d = dir2dir("/tmp/kavanoz2/d1", "/tmp/kavanoz2/d2")
+d2d = dir2dir("/home/volkan/kavanoztest/z1", "/home/volkan/kavanoztest/z2")
 d2d.syncDir("")
